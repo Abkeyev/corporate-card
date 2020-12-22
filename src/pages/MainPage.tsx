@@ -1,44 +1,31 @@
 import React from "react";
-import {
-  Slider,
-  Featured,
-  Widgets,
-  MobileBanking,
-  Useful,
-  News,
-} from "../components";
+import { Slider, Tabs, HowTo, Order, Footer } from "../components";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { animateScroll } from "react-scroll";
 
+const useStyles = makeStyles((theme: Theme) => createStyles({}));
 const MainPage = () => {
+  const orderRef: any = React.useRef(null);
+  const scrollToOrderRef = () => {
+    animateScroll.scrollTo(orderRef.current.offsetTop);
+  };
   return (
     <div className="main-page">
       <div className="container">
         <Slider
-          steps={[
-            {
-              title: "Баспана Хит",
-              desc: "Собственное жильё – это легко!",
-              img: "/img/slide1.svg",
-              btnText: "Заполнить заявку",
-            },
-            {
-              title: "Нужна гарантия для тендера?",
-              desc: "Получайте тендерные гарантии от 20 минут",
-              img: "/img/slide2.svg",
-              btnText: "Заполнить заявку",
-            },
-            {
-              title: "Кредит наличными",
-              desc: "до 7 000 000 ₸ за 15 минут",
-              img: "/img/slide3.svg",
-              btnText: "Оформить кредит",
-            },
-          ]}
+          steps={{
+            title: "Карта #business",
+            desc:
+              "Оформите карту с расчетным счетом - теперь не нужно каждый раз переводить деньги со счета на другие карты",
+            img: "/img/bg.png",
+            btnText: "Оформить карту",
+          }}
+          scrollToOrder={scrollToOrderRef}
         />
-        <Featured />
-        <Widgets />
-        <Useful />
-        <MobileBanking />
-        <News />
+        <Tabs />
+        <HowTo />
+        <Order refProp={orderRef} />
+        <Footer />
       </div>
     </div>
   );
